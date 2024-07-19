@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Danos de Armas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-image: url("https://uhdwallpapers.org/download/elden-ring_479864/3840x2160/");
+            background-size: cover;
+            background-position: center;
+            color: #ffff; /* Texto branco */
+        }
+        .ui.selectable.table {
+            background-color: #fff;
+            color: #000000
+        }
+        .ui.selectable.table th {
+            background-color: #631f1f; /* Cor de fundo do cabeçalho da tabela */
+            color: #fff; /* Cor do texto do cabeçalho da tabela */
+        }
+
+
+        .ui.container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: medium;
+        }
+        .ui.block.header {
+            background-color: #333; /* Fundo do cabeçalho */
+            color: #fff; /* Texto do cabeçalho */
+        }
+        .ui.form .field label {
+            color: #fff; /* Cor das labels do formulário */
+        }
+        .ui.input input {
+            background-color: #555; /* Fundo dos campos de entrada */
+            color: #fff; /* Texto dos campos de entrada */
+        }
+        .ui.button {
+            background-color: #631f1f; /* Fundo do botão */
+            color: #fff; /* Texto do botão */
+            width: auto;
+            height: auto;
+            font-size: medium;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header{
+            font-size: 55px;
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'EB Garamond', serif;
+        }
+        .scrollable-table {
+            max-height: 600px; /* Defina a altura desejada para a área de rolagem */
+            overflow-y: scroll;
+            position: relative;
+        }
+
+        /* Estilizando a barra de rolagem */
+        .scrollable-table::-webkit-scrollbar {
+            width: 13px; /* Largura da barra de rolagem vertical */
+            height: 13px; /* Altura da barra de rolagem horizontal */
+        }
+
+        .scrollable-table::-webkit-scrollbar-track {
+            background: #ffffff; /* Cor do fundo da barra de rolagem */
+            border-radius: 10px;
+        }
+
+        .scrollable-table::-webkit-scrollbar-thumb {
+            background-color: #631f1f; /* Cor da barra de rolagem */
+            border-radius: 10px; /* Arredondamento da barra de rolagem */
+            border: 2px solid #ffffff; /* Bordas da barra de rolagem para criar um espaçamento */
+        }
+        .description{
+            text-align: center;
+            font-size: medium;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ui container">
+        <h1 class="header"> Calculadora de Danos de Armas do Elden Ring</h1>
+        <body class="description">
+        Essa calculadora permite que você insira os atributos do seu próprio personagem do jogo Elden Ring, e obtenha os valores de danos de todas as armas do jogo, com base nesses atributos. Assim, você pode escolher a melhor arma para o seu personagem.
+        </body> 
+        <div class="content">   
+            <div class="ui centered grid">
+                {% if not table %}
+                <form method="post" action="/submit" class="ui centered form">
+                    <div class="field">
+                        <label>Força</label>
+                        <input type="number" name="forca" placeholder="Inserir" required>
+                    </div>
+                    <div class="field">
+                        <label>Destreza</label>
+                        <input type="number" name="destreza" placeholder="Inserir" required>
+                    </div>
+                    <div class="field">
+                        <label>Inteligência</label>
+                        <input type="number" name="inteligencia" placeholder="Inserir" required>
+                    </div>
+                    <div class="field">
+                        <label>Fé</label>
+                        <input type="number" name="fe" placeholder="Inserir" required>
+                    </div>
+                    <div class="field">
+                        <label>Arcano</label>
+                        <input type="number" name="arcano" placeholder="Inserir" required>
+                    </div>
+                    <div class="field">
+                        <label>Nível da arma</label>
+                        <input type="number" name="nivelarma" placeholder="Inserir" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="ui button">Listar todas as armas</button>
+                </form>
+                {% endif %}
+
+                {% if table %}
+                <div class="scrollable-table">
+                    <div>{{ table|safe }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ui vertical footer segment footer">
+            <p>A Calculadora de Danos de Armas foi desenvolvida com base nas informações do patch 1.09 de Elden Ring, e não é oficial. <br>Todos os direitos são da From Software. <br>Desenvolvido por @ocamposfaria.</p>
+        </div>
+    </div>
+</body>
+</html>
